@@ -2,7 +2,6 @@ const Express = require("express");
 const app = new Express();
 require("dotenv").config();
 const router = require("./routes");
-const mongoose = require("mongoose");
 const db = require("./utils/mongodb/mongodb");
 
 //port

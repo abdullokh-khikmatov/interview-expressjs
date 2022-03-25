@@ -129,7 +129,7 @@ class Products {
       }
 
       res.status(200).json({
-        message: "products",
+        message: "ok",
         data: left_data,
       });
     } catch (error) {
