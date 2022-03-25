@@ -1,10 +1,10 @@
 {
-  "name": "mongodb_pr",
+  "name": "stock_express",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-   "start": "nodemon src/server"
+   "start": "node src/server"
   },
   "keywords": [],
   "author": "",
