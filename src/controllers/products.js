@@ -1,8 +1,7 @@
-const mongoose = require("mongoose");
 const { BatchesSchema, ProductSchema } = require("../model/model");
-const db = require("../utils/mongodb/mongodb");
 
 class Products {
+  // add batches = POST
   async POST(req, res) {
     try {
       const { id, price, life, date, count } = req.body;
@@ -28,9 +27,11 @@ class Products {
     }
   }
 
+  //sell products = POST
+
   async SELL(req, res) {
     try {
-      let { id, count, price } = req.body;
+      let { id, count } = req.body;
       let total = 0;
       const data = await BatchesSchema.find({ product_id: id });
 
@@ -76,6 +77,7 @@ class Products {
     }
   }
 
+  // left products = GET
   async GET(_, res) {
     try {
       const products = await ProductSchema.find({});
