@@ -42,32 +42,31 @@ class Products {
         res.status(400).json({
           message: "product count is not enough",
         });
-      }
+      } else {
+        for (let i = 0; count > 0; i++) {
+          if (count <= data[i].count) {
+            let b = await BatchesSchema.find({ product_id: id });
+            const newCount = b[i].count - count;
+            count = 0;
 
-      for (let i = 0; count > 0; i++) {
-        if (count < data[i].count) {
-          async function a() {
-            let b = await BatchesSchema.findById({ product_id: id });
+            await BatchesSchema.findOneAndUpdate(
+              { _id: b[i]._id },
+              { $set: { count: newCount } }
+            );
+          } else if (count > data[i].count) {
+            let b = await BatchesSchema.find({ product_id: id });
+            count = count - b[i].count;
 
-            console.log(b);
-            b.count = 1;
-
-            b.save();
+            await BatchesSchema.findOneAndUpdate(
+              { _id: b[i]._id },
+              { $set: { count: 0 } }
+            );
           }
-
-          console.log(a());
-          BatchesSchema.findOneAndUpdate(
-            { _id: "623cb196deec6c9173f1e171" },
-            { $set: { price } }
-          );
-
-          count = 0;
         }
       }
 
       res.status(200).json({
         message: "ok",
-        data: "ok",
       });
     } catch (error) {
       console.log(error);
